@@ -1,0 +1,231 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://Walk_Right.tres" type="Animation" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://mcUPDATED.png" type="Texture" id=3]
+[ext_resource path="res://Idle_Right.tres" type="Animation" id=4]
+[ext_resource path="res://Idle_Front.tres" type="Animation" id=5]
+[ext_resource path="res://Idle_Left.tres" type="Animation" id=6]
+[ext_resource path="res://Idle_Back.tres" type="Animation" id=7]
+[ext_resource path="res://Walk_Up.tres" type="Animation" id=8]
+[ext_resource path="res://Walk_Left.tres" type="Animation" id=9]
+[ext_resource path="res://Walk_Down.tres" type="Animation" id=10]
+[ext_resource path="res://guy.png" type="Texture" id=11]
+[ext_resource path="res://NPC.gd" type="Script" id=12]
+[ext_resource path="res://Question_mark_(black).svg.png" type="Texture" id=13]
+[ext_resource path="res://UI.gd" type="Script" id=14]
+[ext_resource path="res://MoneyPickup.gd" type="Script" id=15]
+[ext_resource path="res://tempmoney.png" type="Texture" id=16]
+[ext_resource path="res://path-1.png.png" type="Texture" id=17]
+[ext_resource path="res://New Piskel-1.png.png" type="Texture" id=18]
+[ext_resource path="res://window-1.png.png" type="Texture" id=19]
+[ext_resource path="res://test building 2-1.png.png" type="Texture" id=20]
+[ext_resource path="res://test building 2-3.png.png" type="Texture" id=21]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 29.0172
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle_Right"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Idle_Left"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Idle_Back"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=4]
+blend_point_0/node = SubResource( 3 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 7 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 8 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 9 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Walk_Down"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Walk_Right"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Walk_Left"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Walk_Up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=14]
+blend_point_0/node = SubResource( 10 )
+blend_point_0/pos = Vector2( 0, 1.1 )
+blend_point_1/node = SubResource( 11 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 12 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 13 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1.1, -1.1 )
+max_space = Vector2( 1.1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/Idle/node = SubResource( 4 )
+states/Idle/position = Vector2( 206.5, 91.75 )
+states/Walk/node = SubResource( 14 )
+states/Walk/position = Vector2( 397, 90.375 )
+transitions = [ "Idle", "Walk", SubResource( 15 ), "Walk", "Idle", SubResource( 16 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -71.8725, 59.0625 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[sub_resource type="CircleShape2D" id=17]
+radius = 68.3593
+
+[sub_resource type="Environment" id=18]
+background_mode = 4
+glow_enabled = true
+glow_hdr_threshold = 1.5
+
+[node name="main" type="Node2D"]
+
+[node name="Lower Building Container" type="Node" parent="."]
+
+[node name="Path" type="Sprite" parent="Lower Building Container"]
+position = Vector2( 513, 304.5 )
+z_index = -1
+texture = ExtResource( 17 )
+
+[node name="Path2" type="Sprite" parent="Lower Building Container"]
+position = Vector2( 513, 304.5 )
+z_index = -1
+texture = ExtResource( 17 )
+
+[node name="Building" type="Sprite" parent="Lower Building Container"]
+position = Vector2( 980, 473 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 18 )
+
+[node name="Building2" type="Sprite" parent="Lower Building Container"]
+visible = false
+position = Vector2( 545, 402 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+
+[node name="Building3" type="Sprite" parent="Lower Building Container"]
+position = Vector2( 536, 423 )
+scale = Vector2( 1.75, 1.75 )
+texture = ExtResource( 21 )
+
+[node name="Window" type="Sprite" parent="Lower Building Container"]
+modulate = Color( 1.5, 1.5, 2, 1 )
+position = Vector2( 685, 475 )
+texture = ExtResource( 19 )
+
+[node name="player" type="KinematicBody2D" parent="."]
+position = Vector2( 149, 354 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="player"]
+texture = ExtResource( 3 )
+hframes = 4
+vframes = 5
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2( 0, 4 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
+anims/Idle = ExtResource( 5 )
+anims/Idle_Back = ExtResource( 7 )
+anims/Idle_Left = ExtResource( 6 )
+anims/Idle_Right = ExtResource( 4 )
+anims/Walk_Down = ExtResource( 10 )
+anims/Walk_Left = ExtResource( 9 )
+anims/Walk_Right = ExtResource( 1 )
+anims/Walk_Up = ExtResource( 8 )
+
+[node name="AnimationTree" type="AnimationTree" parent="player"]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 6 )
+parameters/Idle/blend_position = Vector2( -0.015561, -0.635193 )
+parameters/Walk/blend_position = Vector2( 0.00573301, -0.948498 )
+
+[node name="Merchant" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 690, 373 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Merchant"]
+texture = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Merchant"]
+position = Vector2( 0, 2 )
+shape = SubResource( 17 )
+
+[node name="QuestionMark" type="Sprite" parent="Merchant"]
+position = Vector2( -1, -51 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 13 )
+
+[node name="MoneyPickup" type="Area2D" parent="."]
+pause_mode = 2
+position = Vector2( 335, 439 )
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="MoneyPickup"]
+scale = Vector2( 0.318605, 0.235043 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoneyPickup"]
+position = Vector2( 0, 2 )
+shape = SubResource( 17 )
+
+[node name="QuestionMark" type="Sprite" parent="MoneyPickup"]
+position = Vector2( -1, -51 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 13 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 14 )
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 22.0
+margin_right = -23.0
+margin_bottom = -18.0
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
+margin_top = 273.0
+margin_right = 984.0
+margin_bottom = 287.0
+grow_horizontal = 0
+grow_vertical = 0
+align = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 18 )
